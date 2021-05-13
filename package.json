@@ -1,0 +1,15 @@
+{
+  "name": "testwebhookcheckrun",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wechorg/testwebhookcheckrun.git",
+  "author": "Wechuli <wechulipaul@yahoo.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0"
+  }
+}
