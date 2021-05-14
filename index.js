@@ -32,6 +32,18 @@ async function getCheckRun(run_id) {
 
   return result.data;
 }
+
+async function listCheckRun(ref) {
+  const result = await axios.get(
+    `https://api.github.com/repos/wechorg/testwebhookcheckrun/commits/${ref}/check-runs`,
+
+    {
+      headers,
+    }
+  );
+
+  return result.data;
+}
 //
 
 app.post("/", async (req, res) => {
@@ -40,10 +52,16 @@ app.post("/", async (req, res) => {
     const payload = req.body;
 
     const payload_obj = JSON.parse(payload["payload"] + '"}}');
+    const run_id = payload_obj.check_run.id;
     console.log(payload_obj.check_run.id);
     if (payload_obj.action === "created") {
-      const checkRun = await getCheckRun(payload_obj.check_run.id);
-      console.log(checkRun);
+      //const checkRun = await getCheckRun(payload_obj.check_run.id);
+
+      const listcheckRuns = listCheckRun("main");
+      const checkRun = getCheckRun(run_id);
+
+      console.log(await checkRun);
+      console.log(await listcheckRuns);
     }
 
     res.status(200).json({ message: "It works" });
